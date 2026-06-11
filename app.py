@@ -78,7 +78,7 @@ st.markdown("""
 
     /* Corecție Hover Butoane în Sidebar - Cenușiu închis corporate */
     [data-testid="stSidebar"] button:hover {
-        background-color: #475569 !important;
+        background-color: #C7C5C6 !important;
         color: #ffffff !important;
         border-color: #475569 !important;
     }
