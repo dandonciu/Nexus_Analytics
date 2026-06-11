@@ -1,10 +1,15 @@
-Product,Code,Stock,Unit,Category
-Saci menaj Eco Waste Line 240L STRONG,NSREG110X125X10S,63,cutie,Saci Menaj
-Palet saci menaj 240L STRONG,PAL-72 NSREG110X125X10S,1,palet,Saci Menaj
-Saci menaj Waste Line 35L STRONG,NS50X60S15S,5,cutie,Saci Menaj
-Rola prosop autocut alb 285m,HWTp934,97,cutie,Prosoape
-Palet rola prosop autocut 285m,PAL HWTp934,15,palet,Prosoape
-Hartie igienica profesionala Flexi Quick,FLX600P,40,cutie,Igienice
-Pahar carton bauturi calde 8OZ,PC8OZ(TP)-lot 2,411,cutie,Pahare
-Lavete turcoaz PureTech Light,84150 (50152),1036,cutie,Lavete
-Palet lavete Craft Extra 36set/pal,PAL 53556set,6,palet,Lavete
+Order Number,Supplier,Order Date,Month,Product Code,Quantity,Unit
+NIR 8311,Furnizor Saci,2025-11-05,November,NSREG110X125X10S,100,cutie
+NIR 8312,Furnizor Hartie,2025-12-10,December,HWTp934,150,cutie
+NIR 8313,Furnizor Pahare,2025-12-18,December,PC8OZ(TP)-lot 2,300,cutie
+NIR 9358,Furnizor Hartie,2026-01-15,January,FLX600P,120,cutie
+NIR 9359,Furnizor Lavete,2026-01-22,January,84150 (50152),500,cutie
+NIR 9381,Furnizor Saci,2026-02-05,February,NSREG110X125X10S,150,cutie
+NIR 9382,Furnizor Saci,2026-02-12,February,NS50X60S15S,100,cutie
+NIR 9539,Furnizor Hartie,2026-03-11,March,HWTp934,180,cutie
+NIR 9540,Furnizor Pahare,2026-03-20,March,PC8OZ(TP)-lot 2,400,cutie
+NIR 9928,Furnizor Saci,2026-04-02,April,NS50X60S15S,120,cutie
+NIR 9955,Furnizor Lavete,2026-04-08,April,84150 (50152),800,cutie
+NIR 10162,Furnizor Hartie,2026-04-15,April,FLX600P,100,cutie
+NIR 10454,Furnizor Saci,2026-05-11,May,NSREG110X125X10S,200,cutie
+NIR 10455,Furnizor Pahare,2026-05-18,May,PC8OZ(TP)-lot 2,350,cutie
