@@ -341,7 +341,7 @@ if st.session_state.active_tab == "📊 Dashboard Executiv":
 
     # KPI 3 - Alertă Stoc Critic
     with col3:
-        stoc_critic_count = len(df_produse[df_produse['stock'] < 30])
+        stoc_critic_count = len(df_produse[df_produse['stock'] < 150])
         kpi_crit_html = '<div class="kpi-card" title="Vedeți mai jos produsele cu stoc critic"><div class="kpi-title">Alertă Stoc Critic</div><div class="kpi-value">' + str(stoc_critic_count) + ' Prod.</div><div class="kpi-trend trend-down">↓ Necesită atenție!</div></div>'
         st.markdown(kpi_crit_html, unsafe_allow_html=True)
         
@@ -652,7 +652,7 @@ if st.session_state.active_tab == "📊 Dashboard Executiv":
         
         for _, r in master_products_sorted.iterrows():
             is_active = r['code'] == selected_product_row['code']
-            stock_color = "#e74c3c" if r['stock'] < 30 else "#2ecc71"
+            stock_color = "#e74c3c" if r['stock'] < 150 else "#2ecc71"
             stock_weight = "bold" if r['stock'] < 30 else "normal"
             
             r_code = r['code']
@@ -687,7 +687,7 @@ if st.session_state.active_tab == "📊 Dashboard Executiv":
         components.html(table_html, height=265)
 
     with row5_col2:
-        critical_products_global = df_produse[df_produse['stock'] < 30]
+        critical_products_global = df_produse[df_produse['stock'] < 150]
         
         card_html = """<div style="background-color: #f8f9fa; border-radius: 10px; padding: 15px; box-shadow: 2px 2px 10px rgba(0,0,0,0.05); border: 1px solid #e9ecef; height: 185px; overflow-y: auto; font-family: sans-serif;">
 <div style="font-size: 13px; font-weight: bold; color: #1e293b; margin-bottom: 8px;">📋 Listă de comenzi (Order List)</div>"""
