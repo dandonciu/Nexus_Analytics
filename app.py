@@ -14,7 +14,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Stiluri CSS personalizate (Fără reguli globale pentru Radio)
+# Stiluri CSS personalizate (Inclusiv optimizări pentru Mobil)
 st.markdown("""
 <style>
     /* Carduri KPI */
@@ -45,13 +45,6 @@ st.markdown("""
     .trend-up { color: #2ecc71; }
     .trend-down { color: #e74c3c; }
 
-/* Corecție Hover Butoane în Sidebar */
-    [data-testid="stSidebar"] button:hover {
-        background-color: #D4D4D6 !important; /* Înlocuit bleu cu cenușiu închis */
-        color: #1e293b !important;            /* Textul rămâne alb pentru contrast */
-        border-color: #475569 !important;     /* Marginea se face cenușie */
-    }
-
     /* PREMIUM DARK SIDEBAR */
     [data-testid="stSidebar"] label, 
     [data-testid="stSidebar"] .stMarkdown p,
@@ -81,6 +74,23 @@ st.markdown("""
         font-size: 6px;
         color: #94a3b8;
         font-family: sans-serif;
+    }
+
+    /* Corecție Hover Butoane în Sidebar - Cenușiu închis corporate */
+    [data-testid="stSidebar"] button:hover {
+        background-color: #475569 !important;
+        color: #ffffff !important;
+        border-color: #475569 !important;
+    }
+
+    /* Adaptabilitate generală KPI-uri pe mobil */
+    @media (max-width: 768px) {
+        .kpi-value {
+            font-size: 20px !important;
+        }
+        .kpi-card {
+            padding: 10px !important;
+        }
     }
 </style>
 """, unsafe_allow_html=True)
@@ -262,7 +272,7 @@ if st.sidebar.button("🔍 Istoricul comenzilor la acest produs", use_container_
     st.session_state.active_tab = "🔍 Operational Insights"
     st.rerun()
 
-# --- BLOC NAVIGARE NATIV (Evită conflictele CSS din Sidebar) ---
+# --- BLOC NAVIGARE NATIV ---
 col_nav1, col_nav2 = st.columns(2)
 with col_nav1:
     if st.button("📊 Dashboard Executiv", use_container_width=True, type="primary" if st.session_state.active_tab == "📊 Dashboard Executiv" else "secondary"):
@@ -470,18 +480,35 @@ if st.session_state.active_tab == "📊 Dashboard Executiv":
         }
         st_echarts(compare_bar_options, height="350px", key="compare_in_out")
 
-    # Tabel rapid sincronizat (Centrat la 60%)
-# Tabel rapid sincronizat (Centrat la 60%)
-    cat_table_html = """<div style="height: 110px; overflow-y: auto; border: 1px solid #e9ecef; border-radius: 8px; font-family: sans-serif; width: 60%; margin: 25px auto 0 auto;">
+    # Tabel rapid sincronizat (Centrat la 60% pe Desktop, 100% pe Mobil)
+    cat_table_html = """
+    <style>
+        .responsive-table-container {
+            height: 110px; 
+            overflow-y: auto; 
+            border: 1px solid #e9ecef; 
+            border-radius: 8px; 
+            font-family: sans-serif; 
+            width: 60%; 
+            margin: 25px auto 0 auto;
+        }
+        @media (max-width: 768px) {
+            .responsive-table-container {
+                width: 100% !important;
+                margin-top: 15px !important;
+            }
+        }
+    </style>
+    <div class="responsive-table-container">
     <table style="width: 100%; border-collapse: collapse; font-size: 11px; text-align: left; table-layout: fixed;">
     <thead>
-<tr style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6; position: sticky; top: 0; z-index: 1;">
-<th style="padding: 6px 8px; color: #495057; width: 25%;">Cod Articol</th>
-<th style="padding: 6px 8px; color: #495057; width: 50%;">Denumire Produs</th>
-<th style="padding: 6px 8px; color: #495057; text-align: right; width: 25%;">Stoc Curent (Cutii)</th>
-</tr>
-</thead>
-<tbody>"""
+    <tr style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6; position: sticky; top: 0; z-index: 1;">
+    <th style="padding: 6px 8px; color: #495057; width: 25%;">Cod Articol</th>
+    <th style="padding: 6px 8px; color: #495057; width: 50%;">Denumire Produs</th>
+    <th style="padding: 6px 8px; color: #495057; text-align: right; width: 25%;">Stoc Curent (Cutii)</th>
+    </tr>
+    </thead>
+    <tbody>"""
     
     for _, r in filtered_products.iterrows():
         stock_color = "#e74c3c" if r['stock'] < 30 else "#2ecc71"
@@ -492,7 +519,7 @@ if st.session_state.active_tab == "📊 Dashboard Executiv":
 </tr>"""
         
     cat_table_html += """</tbody></table></div>"""
-    components.html(cat_table_html, height=125)
+    components.html(cat_table_html, height=140) # Mărit puțin înălțimea pentru a respira pe mobil
 
     st.markdown("---")
 
@@ -684,34 +711,32 @@ Se recomandă analizarea unei oportunități de plasare a unei comenzi de aprovi
             
         card_html += "</div>"
         components.html(card_html, height=265)
-# --- TAB 2: OPERATIONAL INSIGHTS ---
+
+# --- TAB 2: OPERATIONAL INSIGHTS (OPTIIMIZAT RESPONSIVE MOBIL) ---
 else:
     st.subheader("🔍 Monitorizare Operațională - Rampa / WMS")
     st.markdown("Monitorizarea tranzacțională a fluxului de pregătire, integrarea ERP (Oracle WebHook) și istoricul specific al reperelor din comenzi.")
     
-    # Adaugă acest bloc de avertisment elegant aici:
+    # Atenționare tip banner responsiv
     st.markdown("""
     <div style="color: #856404; background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 10px 15px; border-radius: 6px; font-size: 11px; margin-top: 10px; margin-bottom: 20px; font-family: sans-serif; line-height: 1.4;">
-        ⚠️ <b>Notă de simulare operațională:</b>  Fluxul de lucru, starea integrărilor și datele din acest panou au rol demonstrativ. În mediul de producție, acești indicatori se actualizează automat pe baza tranzacțiilor reale de stocuri, intrări, livrări și avize de expediție sincronizate prin WMS.
-
+        ⚠️ <b>Notă de simulare operațională:</b> În mediul de producție real, acești indicatori se actualizează automat în funcție de starea fizică a stocurilor, livrări, intrări și avize de expediție sincronizate cu WMS.
     </div>
     """, unsafe_allow_html=True)
-    
+
     if not df_orders_live.empty:
         # Selector dinamic de comandă activă
         order_options = [f"{row['order_number']} - {row['client_name']}" for _, row in df_orders_live.iterrows()]
         selected_order_string = st.selectbox("Selectează comanda din Rampă:", order_options)
         
-        # Extragem obiectul comenzii selectate
         sel_order_num = selected_order_string.split(" - ")[0]
         active_order = df_orders_live[df_orders_live['order_number'] == sel_order_num].iloc[0]
         
         st.markdown("---")
         
-        # Layout cu două coloane conform celor 2 screenshot-uri trimise
         ops_col1, ops_col2 = st.columns([1, 1])
         
-        # --- COLOANA STÂNGA: STATUS COMANDĂ CURENTĂ ---
+        # --- COLOANA STÂNGA: STATUS COMANDĂ CURENTĂ (CU STILURI MEDIA QUERY) ---
         with ops_col1:
             payload_raw = active_order['payload_logistic'] if active_order['payload_logistic'] else "Nespecificat"
             payload_lines = [line.strip() for line in payload_raw.split(",")]
@@ -723,7 +748,32 @@ else:
             default_address = "București, Str. Logistică nr. 1"
             
             status_panel_html = f"""
-            <div style="background-color: #f8f9fa; border-radius: 8px; border: 1px solid #e2e8f0; padding: 20px; font-family: 'Segoe UI', sans-serif; min-height: 380px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+            <style>
+                body {{ margin: 0; padding: 0; }}
+                .status-card {{
+                    background-color: #f8f9fa; 
+                    border-radius: 8px; 
+                    border: 1px solid #e2e8f0; 
+                    padding: 20px; 
+                    font-family: 'Segoe UI', sans-serif; 
+                    min-height: 380px; 
+                    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+                    box-sizing: border-box;
+                }}
+                @media (max-width: 768px) {{
+                    .status-card {{
+                        padding: 12px !important;
+                        min-height: auto !important;
+                    }}
+                    .status-card ul {{
+                        padding-left: 10px !important;
+                    }}
+                    h1, h2, h3, div, span, ul, li {{
+                        font-size: 95% !important;
+                    }}
+                }}
+            </style>
+            <div class="status-card">
                 <div style="color: #64748b; font-size: 12px; font-weight: bold; letter-spacing: 0.05em; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; margin-bottom: 15px; text-transform: uppercase;">
                     --- STATUS COMANDĂ CURENTĂ ---
                 </div>
@@ -746,7 +796,7 @@ else:
                 </div>
                 
                 <div style="background-color: #f1f5f9; border-radius: 6px; padding: 12px; border-left: 4px solid #0284c7; margin-bottom: 15px;">
-                    <div style="color: #334155; font-size: 11px; font-weight: bold; letter-spacing: 0.03em;">[RĂSPUNS AȘTEPTAT DE LA DEPOZIT (WebHook)]</div>
+                    <div style="color: #334155; font-size: 11px; font-weight: bold; letter-spacing: 0.03em;">[RĂSPUNS AȘTEPTAT DE LA ORACLE (WebHook)]</div>
                     <div style="color: #0284c7; font-size: 13px; font-weight: bold; margin-top: 4px;">Status: {active_order['status']}</div>
                     <div style="color: #64748b; font-size: 10px; font-style: italic; margin-top: 4px; line-height: 1.4;">
                         (Câmpurile "Avizat la data de...", "Nr. Auto" și "Nume Șofer" se vor completa automat în NEXUS DB când Oracle închide avizul de expediție.)
@@ -763,7 +813,7 @@ else:
             """
             components.html(status_panel_html, height=500)
 
-        # --- COLOANA DREAPTĂ: DETALIU PRODUS ȘI ISTORIC ---
+        # --- COLOANA DREAPTĂ: DETALIU PRODUS ȘI ISTORIC (RESPONSIVE GRID) ---
         with ops_col2:
             target_prod_code = "BKTp721" if "BKTp721" in payload_raw else df_produse['code'].iloc[0]
             
@@ -780,26 +830,21 @@ else:
             
             nir_code = "NIR-4451"
             
-            # Reprezentare stoc divizat la palet de 48 de cutii
             stoc_paleti_buc = int(current_aggregated_stock // 48)
             stoc_cutii_buc = int(current_aggregated_stock % 48)
             
-            # Interogare dinamică istoric unificat din baza de date
             history_delivery = df_livrari[df_livrari['product_code'] == target_prod_code]
             
             if not history_delivery.empty:
-                # 1. Data ultimei livrări
                 last_delivery_row = history_delivery.sort_values(by='order_date', ascending=False).iloc[0]
                 last_delivery_date_str = last_delivery_row['order_date'].strftime('%d.%m.%Y')
                 
-                # 2. Cantitate ultima livrare
                 last_qty = int(last_delivery_row['quantity'])
                 last_pals = int(last_qty // 48)
                 last_boxes = int(last_qty % 48)
                 
                 last_delivery_qty_str = f"{last_pals} Palet + {last_boxes} Cuti" if last_pals > 0 else f"{last_boxes} Cuti"
                 
-                # 3. Volumul total în ultimele 12 luni (convertit vizual în paleți rotunzi)
                 total_12m_qty = history_delivery['quantity'].sum()
                 total_12m_palets = max(1, round(total_12m_qty / 48))
             else:
@@ -808,14 +853,59 @@ else:
                 total_12m_palets = 142
 
             product_history_html = f"""
-            <div style="background-color: #f8f9fa; border-radius: 8px; border: 1px solid #e2e8f0; padding: 20px; font-family: 'Segoe UI', sans-serif; min-height: 380px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+            <style>
+                body {{ margin: 0; padding: 0; }}
+                .history-card {{
+                    background-color: #f8f9fa; 
+                    border-radius: 8px; 
+                    border: 1px solid #e2e8f0; 
+                    padding: 20px; 
+                    font-family: 'Segoe UI', sans-serif; 
+                    min-height: 380px; 
+                    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+                    box-sizing: border-box;
+                }}
+                .grid-4 {{
+                    display: grid; 
+                    grid-template-columns: repeat(4, 1fr); 
+                    gap: 10px; 
+                    margin-bottom: 20px;
+                }}
+                .grid-3 {{
+                    display: grid; 
+                    grid-template-columns: repeat(3, 1fr); 
+                    gap: 10px;
+                    margin-bottom: 20px;
+                }}
+                @media (max-width: 768px) {{
+                    .history-card {{
+                        padding: 12px !important;
+                        min-height: auto !important;
+                    }}
+                    .grid-4 {{
+                        grid-template-columns: repeat(2, 1fr) !important;
+                        gap: 8px !important;
+                        margin-bottom: 12px !important;
+                    }}
+                    .grid-3 {{
+                        grid-template-columns: 1fr !important;
+                        gap: 8px !important;
+                        margin-bottom: 12px !important;
+                    }}
+                    h1, h2, h3, div, span {{
+                        font-size: 95% !important;
+                    }}
+                }}
+            </style>
+            <div class="history-card">
                 <div style="color: #1e293b; font-size: 14px; font-weight: bold; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">
                     {prod_name}
                 </div>
                 
-                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px;">
+                <!-- Grilele superioare (Responsive 2x2 pe Mobil) -->
+                <div class="grid-4">
                     <div style="background-color: #ffffff; padding: 8px; border-radius: 6px; border: 1px solid #e2e8f0; text-align: center;">
-                        <span style="color: #64748b; font-size: 9px; display: block; font-weight: 600;">Cod Produs</span>
+                        <span style="color: #64748b; font-size: 9px; display: block; font-weight: 600;">Cod Produs (NEXUS)</span>
                         <span style="color: #1e293b; font-size: 11px; font-weight: bold; font-family: monospace;">{target_prod_code}</span>
                     </div>
                     <div style="background-color: #ffffff; padding: 8px; border-radius: 6px; border: 1px solid #e2e8f0; text-align: center;">
@@ -832,12 +922,13 @@ else:
                     </div>
                 </div>
                 
+                <!-- Istoric Livrări (Responsive pe verticală pe Mobil) -->
                 <div style="margin-bottom: 20px;">
                     <div style="display: flex; align-items: center; color: #1e293b; font-size: 12px; font-weight: bold; margin-bottom: 10px;">
                         <span style="margin-right: 6px;">📊</span> Istoric Livrări (Acest Produs)
                     </div>
                     
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                    <div class="grid-3">
                         <div style="background-color: #f1f5f9; padding: 10px; border-radius: 6px; border-left: 3px solid #0284c7;">
                             <span style="color: #64748b; font-size: 10px; display: block; font-weight: bold;">Ultima livrare:</span>
                             <span style="color: #0284c7; font-size: 12px; font-weight: bold; display: block; margin-top: 4px;">{last_delivery_date_str}</span>
@@ -874,7 +965,7 @@ else:
                 </div>
             </div>
             """
-            components.html(product_history_html, height=420)
+            components.html(product_history_html, height=500)
             
     else:
         st.info("În acest moment nu există comenzi live active în rampa WMS.")
