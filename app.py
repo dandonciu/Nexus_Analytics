@@ -71,8 +71,8 @@ st.markdown("""
         bottom: 2px;
         left: 15%;
         transform: translateX(-50%);
-        font-size: 6px;
-        color: #94a3b8;
+        font-size: 8px;
+        color: #DEDEDE;
         font-family: sans-serif;
     }
 
