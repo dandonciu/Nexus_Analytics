@@ -292,8 +292,8 @@ if st.session_state.active_tab == "📊 Dashboard Executiv":
         st.markdown("""
         <div style="color: #475569; background-color: #f1f5f9; border-left: 4px solid #EBA11F; padding: 6px 12px; border-radius: 6px; font-size: 12px; margin-bottom: 15px; font-family: sans-serif;">
         ⚠️ Notă de simulare: Datele utilizate sînt incomplete și doar parțial corecte. După finalizarea bazelor de date și sincronizarea cu WMS și SmartBill acest inconvenient dispare.
-        <br>  
-        ℹ️ <b>Notă de precizie comercială:</b> Toate cantitățile de tip Palet au fost convertite automat în Cuti/Bucăți la nivel de memorie (tabe dB) pentru a oferi grafice consolidate. Analiza valorică (financiară), în curs de implementare, va fi posibilă după compăletareab bazelor de date. Pentru a evita cumularea cantitativă a unor unități de măsură diferite, se recomandă selectarea unei categorii specifice din meniul din stânga.
+        <br><br>  
+        ℹ️ <b>Precizare:</b> Toate cantitățile de tip Palet au fost convertite automat în Cutii/Bucăți la nivel de memorie (tabel dB) pentru a oferi grafice consolidate. Analiza valorică (financiară), în curs de implementare, va fi posibilă după completarea bazelor de date. Pentru a evita cumularea cantitativă a unor unități de măsură diferite, se recomandă selectarea unei categorii specifice din meniul din stânga.
         </div>
         
         """, unsafe_allow_html=True)
