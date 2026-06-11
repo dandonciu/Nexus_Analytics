@@ -292,6 +292,7 @@ if st.session_state.active_tab == "📊 Dashboard Executiv":
         st.markdown("""
         <div style="color: #475569; background-color: #f1f5f9; border-left: 4px solid #94a3b8; padding: 6px 12px; border-radius: 6px; font-size: 11px; margin-bottom: 15px; font-family: sans-serif;">
             ℹ️ <b>Notă de precizie comercială:</b> Toate cantitățile de tip Palet au fost convertite automat în Cuti/Bucăți la nivel de memorie (DEMO) pentru a oferi grafice consolidate.
+            ℹ️ <b>Notă de precizie comercială:</b> Toate cantitățile de tip Palet au fost convertite automat în Cuti/Bucăți la nivel de memorie (DEMO) pentru a oferi grafice consolidate.
         </div>
         """, unsafe_allow_html=True)
 
