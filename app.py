@@ -95,6 +95,9 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+# Modificarea în app.py:
+alerte = df_produse[df_produse['stock'] < df_produse['minimum_stock']]
+
 # --- ÎNCĂRCARE IMAGINE SIDEBAR DINAMICĂ ---
 bg_image_path = "sidebar_bg.jpg"
 if os.path.exists(bg_image_path):
