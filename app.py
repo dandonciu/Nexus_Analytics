@@ -579,7 +579,7 @@ if st.session_state.active_tab == "📊 Dashboard Executiv":
                     "lineStyle": {
                         "width": 10,
                         "color": [
-                            [0.25, "#e74c3c"],
+                            [0.15, "#e74c3c"],
                             [0.6, "#f1c40f"],
                             [1, "#2ecc71"]
                         ]
