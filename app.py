@@ -341,7 +341,7 @@ if st.session_state.active_tab == "📊 Dashboard Executiv":
 
     # KPI 3 - Alertă Stoc Critic
     with col3:
-        stoc_critic_count = len(df_produse[df_produse['stock'] < 150])
+        stoc_critic_count = len(df_produse[df_produse['stock'] < 200])
         kpi_crit_html = '<div class="kpi-card" title="Vedeți mai jos produsele cu stoc critic"><div class="kpi-title">Alertă Stoc Critic</div><div class="kpi-value">' + str(stoc_critic_count) + ' Prod.</div><div class="kpi-trend trend-down">↓ Necesită atenție!</div></div>'
         st.markdown(kpi_crit_html, unsafe_allow_html=True)
         
