@@ -74,7 +74,7 @@ st.markdown("""
         font-size: 8px;
         color: #DEDEDE;
         font-family: sans-serif;
-    }
+    
 
     /* Corecție Hover Butoane în Sidebar - Cenușiu închis corporate */
     [data-testid="stSidebar"] button:hover {
@@ -94,11 +94,6 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
-# 1. Întâi încarci datele din DB (asigură-te că linia asta este deasupra alertelor)
-df_produse, df_livrari, df_receptii, df_orders_live = load_data_from_db()
-
-# 2. Abia după ce df_produse a fost definit, rulezi filtrarea pentru alerte:
-alerte = df_produse[df_produse['stock'] < df_produse['minimum_stock']]
 
 # --- ÎNCĂRCARE IMAGINE SIDEBAR DINAMICĂ ---
 bg_image_path = "sidebar_bg.jpg"
@@ -226,7 +221,7 @@ st.sidebar.subheader("📅 Perioadă Analiză")
 period_option = st.sidebar.radio(
     "Selectează intervalul:",
     ["1 lună", "3 luni", "6 luni", "12 luni"],
-    index=2,
+    index=1,
     horizontal=False
 )
 
@@ -346,7 +341,7 @@ if st.session_state.active_tab == "📊 Dashboard Executiv":
 
     # KPI 3 - Alertă Stoc Critic
     with col3:
-        stoc_critic_count = len(df_produse[df_produse['stock'] < 300])
+        stoc_critic_count = len(df_produse[df_produse['stock'] < 150])
         kpi_crit_html = '<div class="kpi-card" title="Vedeți mai jos produsele cu stoc critic"><div class="kpi-title">Alertă Stoc Critic</div><div class="kpi-value">' + str(stoc_critic_count) + ' Prod.</div><div class="kpi-trend trend-down">↓ Necesită atenție!</div></div>'
         st.markdown(kpi_crit_html, unsafe_allow_html=True)
         
@@ -584,7 +579,7 @@ if st.session_state.active_tab == "📊 Dashboard Executiv":
                     "lineStyle": {
                         "width": 10,
                         "color": [
-                            [0.15, "#e74c3c"],
+                            [0.2, "#e74c3c"],
                             [0.6, "#f1c40f"],
                             [1, "#2ecc71"]
                         ]
@@ -648,8 +643,8 @@ if st.session_state.active_tab == "📊 Dashboard Executiv":
 <th style="padding: 10px 8px; color: #495057; width: 40%;">Denumire Produs</th>
 <th style="padding: 10px 8px; color: #495057; width: 18%;">Cod Articol</th>
 <th style="padding: 10px 8px; color: #495057; text-align: right; width: 11%;">Stoc (Cutii)</th>
-<th style="padding: 10px 8px; color: #495057; text-align: center; width: 11%; line-height: 1.2;">Medie<br/>Consum lunar<br/>3 luni</th>
-<th style="padding: 10px 8px; color: #495057; text-align: center; width: 11%; line-height: 1.2;">Medie<br/>Consum lunar<br/>6 luni</th>
+<th style="padding: 10px 8px; color: #495057; text-align: center; width: 11%; line-height: 1.2;">Medie<br/>Consum<br/>3 luni</th>
+<th style="padding: 10px 8px; color: #495057; text-align: center; width: 11%; line-height: 1.2;">Medie<br/>Consum<br/>6 luni</th>
 <th style="padding: 10px 8px; color: #495057; text-align: right; width: 10%; font-weight: bold;">Necesar Stoc*</th>
 </tr>
 </thead>
