@@ -646,8 +646,8 @@ if st.session_state.active_tab == "📊 Dashboard Executiv":
 <th style="padding: 10px 8px; color: #495057; width: 40%;">Denumire Produs</th>
 <th style="padding: 10px 8px; color: #495057; width: 18%;">Cod Articol</th>
 <th style="padding: 10px 8px; color: #495057; text-align: right; width: 11%;">Stoc (Cutii)</th>
-<th style="padding: 10px 8px; color: #495057; text-align: center; width: 11%; line-height: 1.2;">Medie<br/>Consum<br/>3 luni</th>
-<th style="padding: 10px 8px; color: #495057; text-align: center; width: 11%; line-height: 1.2;">Medie<br/>Consum<br/>6 luni</th>
+<th style="padding: 10px 8px; color: #495057; text-align: center; width: 11%; line-height: 1.2;">Medie<br/>Consum lunar<br/>3 luni</th>
+<th style="padding: 10px 8px; color: #495057; text-align: center; width: 11%; line-height: 1.2;">Medie<br/>Consum lunar<br/>6 luni</th>
 <th style="padding: 10px 8px; color: #495057; text-align: right; width: 10%; font-weight: bold;">Necesar Stoc*</th>
 </tr>
 </thead>
