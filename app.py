@@ -221,7 +221,7 @@ st.sidebar.subheader("📅 Perioadă Analiză")
 period_option = st.sidebar.radio(
     "Selectează intervalul:",
     ["1 lună", "3 luni", "6 luni", "12 luni"],
-    index=1,
+    index=2,
     horizontal=False
 )
 
