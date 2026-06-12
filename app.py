@@ -94,8 +94,10 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
+# 1. Întâi încarci datele din DB (asigură-te că linia asta este deasupra alertelor)
+df_produse, df_livrari, df_receptii, df_orders_live = load_data_from_db()
 
-# Modificarea în app.py:
+# 2. Abia după ce df_produse a fost definit, rulezi filtrarea pentru alerte:
 alerte = df_produse[df_produse['stock'] < df_produse['minimum_stock']]
 
 # --- ÎNCĂRCARE IMAGINE SIDEBAR DINAMICĂ ---
